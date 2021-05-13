@@ -65,12 +65,12 @@ an `InvoiceCollection`.
 
 ```ruby
 # Change This
-Recurly::Invoice.find_each(50) do |invoice|
+RecurlyLegacyGem::Invoice.find_each(50) do |invoice|
   puts invoice
 end
 
 # To This
-Recurly::Invoice.find_each(per_page: 50) do |invoice|
+RecurlyLegacyGem::Invoice.find_each(per_page: 50) do |invoice|
   puts invoice
 end
 ```
@@ -89,7 +89,7 @@ end
 `mark_failed` no longer reloads the invoice with the response returning true or false, it returns either an `InvoiceCollection` if failable and request is successful, it returns `false` if invoice cannot be marked failed. To keep functionality, take the `charge_invoice` of the returned collection:
 
 ```ruby
-invoice = Recurly::Invoice.find('1001')
+invoice = RecurlyLegacyGem::Invoice.find('1001')
 
 failed_collection = invoice.mark_failed
 if failed_collection
@@ -239,7 +239,7 @@ All `country` fields must now contain valid [2 letter ISO 3166 country codes](ht
 The purchases endpoint can create and invoice multiple adjustments at once but our invoices can only contain items in one currency. To make this explicit the currency can no longer be provided on an adjustment, it must be set once for the entire purchase:
 
 ```ruby
-purchase = Recurly::Purchase.new(
+purchase = RecurlyLegacyGem::Purchase.new(
   # The purchase object is the only place you can set the currency:
   currency: 'USD',
   account: {

@@ -312,7 +312,7 @@ describe Subscription do
     end
 
     it "should be able to pause and resume a subscription" do
-      sub = Recurly::Subscription.find('abcdef1234567890')
+      sub = RecurlyLegacyGem::Subscription.find('abcdef1234567890')
       sub.paused_at.must_equal nil
       sub.pause(1).must_equal true
       sub.paused_at.must_be_instance_of DateTime
@@ -366,7 +366,7 @@ describe Subscription do
 
         stub_request(:put, "https://api.recurly.com/v2/subscriptions/abcdef1234567890").
           with(:body => "<subscription><plan_code>abc</plan_code><quantity>1</quantity><unit_amount_in_cents>1500</unit_amount_in_cents></subscription>",
-               :headers => Recurly::API.headers).
+               :headers => RecurlyLegacyGem::API.headers).
           to_return(:status => 200, :body => "", :headers => {})
 
         subscription.update_attributes({ plan_code: 'abc', quantity: 1, unit_amount_in_cents: 1500 })
@@ -383,7 +383,7 @@ describe Subscription do
 
         stub_request(:put, "https://api.recurly.com/v2/subscriptions/abcdef1234567890").
           with(:body => "<subscription><plan_code>plan_code</plan_code><unit_amount_in_cents>1500</unit_amount_in_cents></subscription>",
-               :headers => Recurly::API.headers).
+               :headers => RecurlyLegacyGem::API.headers).
           to_return(:status => 200, :body => "", :headers => {})
 
         subscription.update_attributes({ plan_code: 'plan_code', quantity: 1, unit_amount_in_cents: 1500 })
@@ -403,9 +403,9 @@ describe Subscription do
         'subscriptions/abcdef1234567890/shipping_address',
         'shipping_addresses/show-200'
       )
-      subscription = Recurly::Subscription.find("abcdef1234567890")
+      subscription = RecurlyLegacyGem::Subscription.find("abcdef1234567890")
       shad = subscription.shipping_address
-      shad.must_be_instance_of Recurly::ShippingAddress
+      shad.must_be_instance_of RecurlyLegacyGem::ShippingAddress
     end
   end
 end

@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class XML
     class << self
       def cast(el)
@@ -22,7 +22,7 @@ module Recurly
           # try to find a Resource class responsible for this element
           [el.name, type].each do |name|
             next unless name
-            if resource = Recurly::Resource.find_resource_class(name)
+            if resource = RecurlyLegacyGem::Resource.find_resource_class(name)
               return resource.from_xml(el)
             end
           end

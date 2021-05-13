@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   # Redemptions are not top-level resources, but they can be accessed (and
   # created) through {Coupon} instances.
   #
@@ -35,7 +35,7 @@ module Recurly
       return false if persisted?
       copy_from coupon.redeem account, currency
       true
-    rescue Recurly::API::UnprocessableEntity => e
+    rescue RecurlyLegacyGem::API::UnprocessableEntity => e
       apply_errors e
       false
     end

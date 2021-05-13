@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   module Version
     MAJOR   = 2
     MINOR   = 16

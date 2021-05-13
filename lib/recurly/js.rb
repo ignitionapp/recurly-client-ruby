@@ -2,7 +2,7 @@ require 'openssl'
 require 'base64'
 require 'cgi'
 
-module Recurly
+module RecurlyLegacyGem
   # @deprecated Please use the new Recurly.js tokenization system https://dev.recurly.com/docs/recurlyjs
   #
   # A collection of helper methods to use to verify the old

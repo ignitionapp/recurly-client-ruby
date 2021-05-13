@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class Resource
     class Errors < Hash
       def [] key

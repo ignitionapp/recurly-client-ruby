@@ -3,12 +3,12 @@ require 'spec_helper'
 describe GiftCard do
   let(:gift_card) {
     stub_api_request :get, 'gift_cards/2004005808969875135', 'gift_cards/show-200'
-    Recurly::GiftCard.find 2004005808969875135
+    RecurlyLegacyGem::GiftCard.find 2004005808969875135
   }
 
   let(:gift_cards) {
     stub_api_request :get, 'gift_cards', 'gift_cards/index-200'
-    Recurly::GiftCard.all
+    RecurlyLegacyGem::GiftCard.all
   }
 
   describe "#all" do
@@ -29,7 +29,7 @@ describe GiftCard do
 
   describe "#find" do
     it "should find a gift card" do
-      gift_card.must_be_instance_of Recurly::GiftCard
+      gift_card.must_be_instance_of RecurlyLegacyGem::GiftCard
     end
 
     it "should parse all the gift card fields" do
@@ -52,7 +52,7 @@ describe GiftCard do
 
       delivery = gift_card.delivery
 
-      delivery.must_be_instance_of Recurly::Delivery
+      delivery.must_be_instance_of RecurlyLegacyGem::Delivery
       delivery.method.must_equal "email"
       delivery.deliver_at.must_equal nil
       delivery.email_address.must_equal "john@example.com"
@@ -116,7 +116,7 @@ describe GiftCard do
         }
       end
       let(:gift_card) {
-        Recurly::GiftCard.new(
+        RecurlyLegacyGem::GiftCard.new(
           product_code: 'gift_card',
           currency: 'USD',
           unit_amount_in_cents: 2000,

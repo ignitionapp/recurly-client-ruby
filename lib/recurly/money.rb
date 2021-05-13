@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   # Represents a collection of currencies (in cents).
   class Money
     # @return A money object representing multiple currencies (in cents).
@@ -20,11 +20,11 @@ module Recurly
 
       if currencies.respond_to? :each_pair
         currencies.each_pair { |key, value| @currencies[key.to_s] = value }
-      elsif Recurly.default_currency
-        self[Recurly.default_currency] = currencies
+      elsif RecurlyLegacyGem.default_currency
+        self[RecurlyLegacyGem.default_currency] = currencies
       else
         message = 'expected a Hash'
-        message << ' or Numeric' if Recurly.default_currency
+        message << ' or Numeric' if RecurlyLegacyGem.default_currency
         message << " but received #{currencies.class}"
         raise ArgumentError, message
       end
@@ -106,7 +106,7 @@ module Recurly
     def method_missing name, *args, &block
       if currencies.respond_to? name
         return currencies.send name, *args, &block
-      elsif c = currencies[Recurly.default_currency] and c.respond_to? name
+      elsif c = currencies[RecurlyLegacyGem.default_currency] and c.respond_to? name
         if currencies.keys.length > 1
           raise TypeError, "can't convert multicurrency into Integer"
         else

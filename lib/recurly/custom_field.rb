@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   # Recurly Documentation: https://dev.recurly.com/docs/custom-fields
   class CustomField < Resource
 

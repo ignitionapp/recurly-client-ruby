@@ -1,6 +1,6 @@
 require 'cgi'
 
-module Recurly
+module RecurlyLegacyGem
   class API
     # The superclass to all errors that occur when making an API request.
     class ResponseError < Error

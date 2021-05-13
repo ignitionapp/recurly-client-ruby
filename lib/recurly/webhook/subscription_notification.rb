@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   module Webhook
     # The SubscriptionNotification class provides a generic interface
     # for account-related webhook notifications.

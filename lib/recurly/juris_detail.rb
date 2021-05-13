@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class JurisDetail < Resource
     define_attribute_methods %w(
       description

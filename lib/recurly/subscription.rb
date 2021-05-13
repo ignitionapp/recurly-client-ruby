@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class Subscription < Resource
     require 'recurly/subscription/add_ons'
 
@@ -109,7 +109,7 @@ module Recurly
 
     # @return [Subscription] A new subscription.
     def initialize(attributes = {})
-      super({ :currency => Recurly.default_currency }.merge attributes)
+      super({ :currency => RecurlyLegacyGem.default_currency }.merge attributes)
     end
 
     # Assign a Plan resource (rather than a plan code).

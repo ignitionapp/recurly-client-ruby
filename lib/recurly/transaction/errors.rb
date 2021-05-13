@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class Transaction < Resource
     # The base error class for transaction errors, raised when a transaction
     # fails.

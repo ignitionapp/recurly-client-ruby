@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class Transaction < Resource
     require 'recurly/transaction/errors'
 
@@ -71,7 +71,7 @@ module Recurly
 
     # @see Resource#initialize
     def initialize(attributes = {})
-      super({ :currency => Recurly.default_currency }.merge attributes)
+      super({ :currency => RecurlyLegacyGem.default_currency }.merge attributes)
     end
 
     # Saves new records only.
@@ -81,7 +81,7 @@ module Recurly
     # @see Resource#save
     def save
       return super if new_record?
-      raise Recurly::Error, "#{self.class.collection_name} cannot be updated"
+      raise RecurlyLegacyGem::Error, "#{self.class.collection_name} cannot be updated"
     end
 
     # Refunds the transaction.

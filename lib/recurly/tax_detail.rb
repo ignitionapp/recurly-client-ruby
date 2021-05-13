@@ -1,6 +1,6 @@
 require 'bigdecimal'
 
-module Recurly
+module RecurlyLegacyGem
   class TaxDetail < Resource
     define_attribute_methods %w(
       name

@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   module Helper
     def camelize underscored_word
       underscored_word.to_s.gsub(/(?:^|_)(.)/) { $1.upcase }

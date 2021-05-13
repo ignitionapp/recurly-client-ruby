@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   module Webhook
     class GiftCardNotification < Notification
       has_one :gift_card

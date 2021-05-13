@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   module Webhook
     class VoidedCreditInvoiceNotification < InvoiceNotification
     end

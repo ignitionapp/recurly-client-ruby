@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   # Accounts are core to managing your customers inside of Recurly.
   # The account object stores the entire Recurly history of your customer and acts as the entry point
   # for working with a customer's billing information, subscription data, transactions, invoices and more.
@@ -88,7 +88,7 @@ module Recurly
     # @raise [Invalid] Raised if the account cannot be invoiced.
     def invoice!(attrs={})
       InvoiceCollection.from_response API.post(invoices.uri, attrs.empty? ? nil : Invoice.to_xml(attrs))
-    rescue Recurly::API::UnprocessableEntity => e
+    rescue RecurlyLegacyGem::API::UnprocessableEntity => e
       raise Invalid, e.message
     end
 
@@ -99,7 +99,7 @@ module Recurly
     # @raise [Invalid] Raised if the account cannot be invoiced.
     def build_invoice
       InvoiceCollection.from_response API.post("#{invoices.uri}/preview")
-    rescue Recurly::API::UnprocessableEntity => e
+    rescue RecurlyLegacyGem::API::UnprocessableEntity => e
       raise Invalid, e.message
     end
 

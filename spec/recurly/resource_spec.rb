@@ -38,7 +38,7 @@ Content-Type: text/html; charset=utf-8
 <html></html>
 HTML
         end
-        proc { Resource.find(123) }.must_raise Recurly::Error
+        proc { Resource.find(123) }.must_raise RecurlyLegacyGem::Error
       end
     end
 
@@ -215,12 +215,12 @@ XML
 
     describe ".has_many" do
       before do
-        Recurly.const_set :Reason, Class.new(Resource)
+        RecurlyLegacyGem.const_set :Reason, Class.new(Resource)
         resource.has_many :reasons
       end
 
       after do
-        Recurly.send :remove_const, :Reason
+        RecurlyLegacyGem.send :remove_const, :Reason
       end
 
       it "must define an association" do
@@ -246,13 +246,13 @@ XML
 
     describe ".has_one and .belongs_to" do
       before do
-        Recurly.const_set :Day, Class.new(Resource)
+        RecurlyLegacyGem.const_set :Day, Class.new(Resource)
         resource.has_one :day
         Day.belongs_to :resource
       end
 
       after do
-        Recurly.send :remove_const, :Day
+        RecurlyLegacyGem.send :remove_const, :Day
       end
 
       it "must define an association" do
@@ -295,13 +295,13 @@ XML
 
     describe ".has_one, readonly => false" do
       before do
-        Recurly.const_set :Day, Class.new(Resource)
+        RecurlyLegacyGem.const_set :Day, Class.new(Resource)
         resource.has_one :day, :readonly => false
         @record = resource.new
       end
 
       after do
-        Recurly.send :remove_const, :Day
+        RecurlyLegacyGem.send :remove_const, :Day
       end
 
       it "must assign relation from a Hash" do
@@ -469,14 +469,14 @@ XML
 
       describe "invalid records" do
         before do
-          Recurly.const_set :Child, resource
+          RecurlyLegacyGem.const_set :Child, resource
           resource.has_one :child, :readonly => false
           record.child = resource.new
           stub_api_request(:post, 'resources') { XML[422] }
         end
 
         after do
-          Recurly.send :remove_const, :Child
+          RecurlyLegacyGem.send :remove_const, :Child
         end
 
         it "#save must return false and assign errors" do

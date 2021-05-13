@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class GiftCard < Resource
     # @return [Invoice, nil]
     belongs_to :invoice

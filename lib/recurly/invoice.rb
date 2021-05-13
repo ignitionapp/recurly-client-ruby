@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   # Invoices are created through account objects.
   #
   # Recurly Documentation: https://dev.recurly.com/docs/list-invoices
@@ -130,7 +130,7 @@ module Recurly
     def mark_failed
       return false unless link? :mark_failed
       InvoiceCollection.from_response follow_link(:mark_failed)
-    rescue Recurly::API::UnprocessableEntity => e
+    rescue RecurlyLegacyGem::API::UnprocessableEntity => e
       raise Invalid, e.message
     end
 
@@ -160,7 +160,7 @@ module Recurly
     # @raise [Error] If the transaction fails.
     def enter_offline_payment(attrs={})
       Transaction.from_response API.post("#{uri}/transactions", attrs.empty? ? nil : Transaction.to_xml(attrs))
-    rescue Recurly::API::UnprocessableEntity => e
+    rescue RecurlyLegacyGem::API::UnprocessableEntity => e
       raise Invalid, e.message
     end
 
@@ -204,7 +204,7 @@ module Recurly
     private
 
     def initialize(attributes = {})
-      super({ :currency => Recurly.default_currency }.merge attributes)
+      super({ :currency => RecurlyLegacyGem.default_currency }.merge attributes)
     end
 
     def refund_amount_to_xml amount_in_cents = nil, refund_method

@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   # The API class handles all requests to the Recurly API. While most of its
   # functionality is leveraged by the Resource class, it can be used directly,
   # as well.
@@ -73,7 +73,7 @@ module Recurly
 
       # @return [URI::Generic]
       def base_uri
-        URI.parse @@base_uri.sub('api', Recurly.subdomain)
+        URI.parse @@base_uri.sub('api', RecurlyLegacyGem.subdomain)
       end
 
       def validate_uri!(uri)

@@ -1,7 +1,7 @@
 require 'date'
 require 'erb'
 
-module Recurly
+module RecurlyLegacyGem
   # The base class for all Recurly resources (e.g. {Account}, {Subscription},
   # {Transaction}).
   #
@@ -265,7 +265,7 @@ module Recurly
 
       # @return [Hash] Defined scopes per resource.
       def scopes
-        @scopes ||= Recurly::Helper.hash_with_indifferent_read_access
+        @scopes ||= RecurlyLegacyGem::Helper.hash_with_indifferent_read_access
       end
 
       # @return [Module] Module of scopes methods.
@@ -387,7 +387,7 @@ module Recurly
           record.instance_eval { @etag, @response = response['ETag'], response }
           record
         else
-          raise Recurly::Error, "Content-Type \"#{content_type}\" is not accepted"
+          raise RecurlyLegacyGem::Error, "Content-Type \"#{content_type}\" is not accepted"
         end
       end
 
@@ -426,7 +426,7 @@ module Recurly
 
           if association = find_association(el.name)
             class_name = association_class_name(association, el.name)
-            resource_class = Recurly.const_get(class_name)
+            resource_class = RecurlyLegacyGem.const_get(class_name)
             is_many = association.relation == :has_many
 
             # Is this a link, or is it embedded data?
@@ -542,7 +542,7 @@ module Recurly
         associations_helper.module_eval do
           define_method(member_name) { self[member_name] }
           if options.key?(:readonly) && options[:readonly] == false
-            associated = Recurly.const_get Helper.classify(member_name), false
+            associated = RecurlyLegacyGem.const_get Helper.classify(member_name), false
             define_method "#{member_name}=" do |member|
               associated_uri = "#{path}/#{member_name}"
               self[member_name] = case member
@@ -603,8 +603,8 @@ module Recurly
 
       def find_resource_class(name)
         resource_name = Helper.classify(name)
-        if Recurly.const_defined?(resource_name, false)
-          Recurly.const_get(resource_name, false)
+        if RecurlyLegacyGem.const_defined?(resource_name, false)
+          RecurlyLegacyGem.const_get(resource_name, false)
         end
       end
     end
@@ -768,7 +768,7 @@ module Recurly
     end
 
     def as_json(options = nil)
-      attributes.reject { |k, v| v.is_a?(Recurly::Resource::Pager) }
+      attributes.reject { |k, v| v.is_a?(RecurlyLegacyGem::Resource::Pager) }
     end
 
     # @return [Hash] The raw hash of record href links.
@@ -800,7 +800,7 @@ module Recurly
         end
         response
       end
-    rescue Recurly::API::NotFound
+    rescue RecurlyLegacyGem::API::NotFound
       raise unless resource_class
     end
 
@@ -823,7 +823,7 @@ module Recurly
           value.to_xml options.merge(:builder => node)
         when Array
           value.each do |e|
-            if e.is_a? Recurly::Resource
+            if e.is_a? RecurlyLegacyGem::Resource
               # create a node to hold this resource
               e_node = node.add_element Helper.singularize(key)
               # serialize the resource into this node
@@ -833,7 +833,7 @@ module Recurly
               node.add_element(Helper.singularize(key), e)
             end
           end
-        when Hash, Recurly::Money
+        when Hash, RecurlyLegacyGem::Money
           value.each_pair { |k, v| node.add_element k.to_s, v }
         else
           node.text = value
@@ -1092,7 +1092,7 @@ module Recurly
         association_name = options[:association_name] || name
         associated_class_name = self.class.find_association(association_name).class_name
         associated_class_name ||= Helper.classify(name)
-        Recurly.const_get(associated_class_name, false).send(:new, value)
+        RecurlyLegacyGem.const_get(associated_class_name, false).send(:new, value)
       when Proc, Resource, Resource::Pager, nil
         value
       else

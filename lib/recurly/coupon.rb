@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
 
   # Recurly Documentation: https://dev.recurly.com/docs/list-active-coupons
   class Coupon < Resource
@@ -73,7 +73,7 @@ module Recurly
 
       redemption_options = {
         :account_code => account_code,
-        :currency     => currency || Recurly.default_currency
+        :currency     => currency || RecurlyLegacyGem.default_currency
       }.merge(extra_opts)
 
       redemption = Redemption.new(redemption_options)
@@ -103,7 +103,7 @@ module Recurly
         :body => builder.to_s
       )
 
-      Pager.new(Recurly::Coupon, uri: resp['location'], parent: self, etag: resp['ETag'])
+      Pager.new(RecurlyLegacyGem::Coupon, uri: resp['location'], parent: self, etag: resp['ETag'])
     end
 
     # Redeem a coupon on the given account code

@@ -1,4 +1,4 @@
-module Recurly
+module RecurlyLegacyGem
   class Address < Resource
     define_attribute_methods %w(
       address1

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Recurly::XML do
+describe RecurlyLegacyGem::XML do
   describe ".filter" do
     it "must filter sensitive data only on number and verification_value" do
       [
@@ -25,14 +25,14 @@ describe Recurly::XML do
           '<subscription><account><billing_info><vat_number>DE123456789</vat_number></billing_info></account></subscription>'
         ]
       ].each do |input, output|
-        Recurly::XML.filter(input).must_equal output
+        RecurlyLegacyGem::XML.filter(input).must_equal output
       end
     end
   end
 
   describe ".text" do
     before :each do
-      @sample_xml = Recurly::XML.new("<root><node>Text from node</node>Text from root</root>")
+      @sample_xml = RecurlyLegacyGem::XML.new("<root><node>Text from node</node>Text from root</root>")
     end
 
     it "should return the first child text node" do

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Recurly.js do
-  let(:js) { Recurly.js }
+describe RecurlyLegacyGem.js do
+  let(:js) { RecurlyLegacyGem.js }
 
   describe "private_key" do
     it "must be assignable" do
@@ -13,30 +13,30 @@ describe Recurly.js do
       if js.instance_variable_defined? :@private_key
         js.send :remove_instance_variable, :@private_key
       end
-      proc { Recurly.js.private_key }.must_raise ConfigurationError
+      proc { RecurlyLegacyGem.js.private_key }.must_raise ConfigurationError
     end
 
     it "must raise an exception when set to nil" do
-      Recurly.js.private_key = nil
-      proc { Recurly.js.private_key }.must_raise ConfigurationError
+      RecurlyLegacyGem.js.private_key = nil
+      proc { RecurlyLegacyGem.js.private_key }.must_raise ConfigurationError
     end
 
     it "must use defaults set if not sent in new thread" do
-      Recurly.js.private_key = 'testprivate'
+      RecurlyLegacyGem.js.private_key = 'testprivate'
 
       Thread.new {
-        Recurly.js.private_key.must_equal 'testprivate'
+        RecurlyLegacyGem.js.private_key.must_equal 'testprivate'
       }
 
     end
 
     it "must use new values set in thread context" do
-      Recurly.js.private_key = 'testprivate'
+      RecurlyLegacyGem.js.private_key = 'testprivate'
       Thread.new {
-        Recurly.config(private_key: "newprivate")
-        Recurly.js.private_key.must_equal 'newprivate'
+        RecurlyLegacyGem.config(private_key: "newprivate")
+        RecurlyLegacyGem.js.private_key.must_equal 'newprivate'
       }
-      Recurly.js.private_key.must_equal 'testprivate'
+      RecurlyLegacyGem.js.private_key.must_equal 'testprivate'
     end
   end
 
@@ -50,12 +50,12 @@ describe Recurly.js do
       if js.instance_variable_defined? :@public_key
         js.send :remove_instance_variable, :@public_key
       end
-      proc { Recurly.js.public_key }.must_raise ConfigurationError
+      proc { RecurlyLegacyGem.js.public_key }.must_raise ConfigurationError
     end
 
     it "must raise an exception when set to nil" do
-      Recurly.js.public_key = nil
-      proc { Recurly.js.public_key }.must_raise ConfigurationError
+      RecurlyLegacyGem.js.public_key = nil
+      proc { RecurlyLegacyGem.js.public_key }.must_raise ConfigurationError
     end
   end
 
@@ -91,7 +91,7 @@ describe Recurly.js do
     end
 
     it "must sign transaction request" do
-      Recurly.js.sign(
+      RecurlyLegacyGem.js.sign(
         'account' => { 'account_code' => '123' },
         'transaction' => {
           'amount_in_cents' => 5000,
@@ -108,7 +108,7 @@ EOS
     end
 
     it "must sign subscription request" do
-      Recurly.js.sign(
+      RecurlyLegacyGem.js.sign(
         'account' => { 'account_code' => '123' },
         'subscription' => {
           'plan_code' => 'gold'
@@ -125,7 +125,7 @@ EOS
     describe "object signatures" do
       it "must sign update billing info request" do
         billing_info = Account.new(:account_code => '123')
-        Recurly.js.sign(billing_info).must_equal <<EOS.chomp
+        RecurlyLegacyGem.js.sign(billing_info).must_equal <<EOS.chomp
 86509e315e8396423e420839a9c4cbafd5f230f3|\
 account%5Baccount_code%5D=123&\
 nonce=unique&\
@@ -137,7 +137,7 @@ EOS
         subscription = Subscription.new :plan_code => 'gold'
         subscription.currency = 'USD'
         account = Account.new :account_code => '123'
-        Recurly.js.sign(subscription, account).must_equal <<EOS.chomp
+        RecurlyLegacyGem.js.sign(subscription, account).must_equal <<EOS.chomp
 c74db6318765b7f3e0e31ad54a7773000646df0b|\
 account%5Baccount_code%5D=123&\
 nonce=unique&\
@@ -152,7 +152,7 @@ EOS
         transaction.currency = 'USD'
         transaction.persist!
         account = Account.new :account_code => '123'
-        Recurly.js.sign(transaction, account).must_equal <<EOS.chomp
+        RecurlyLegacyGem.js.sign(transaction, account).must_equal <<EOS.chomp
 95c000d2aa045cb20596b8a751b08c8dfaee8cf2|\
 account%5Baccount_code%5D=123&\
 nonce=unique&\
