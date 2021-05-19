@@ -12,7 +12,7 @@ module RecurlyLegacyGem
   #   Recurly::API.put 'accounts/1', xml_body # => #<Net::HTTPOK ...>
   #   Recurly::API.delete 'accounts/1'        # => #<Net::HTTPNoContent ...>
   class API
-    require 'recurly/api/errors'
+    require 'recurly_legacy_gem/api/errors'
 
     @@base_uri = "https://api.recurly.com/v2/"
     @@valid_domains = [".recurly.com"]
@@ -98,4 +98,4 @@ module RecurlyLegacyGem
   end
 end
 
-require 'recurly/api/net_http_adapter'
+require 'recurly_legacy_gem/api/net_http_adapter'

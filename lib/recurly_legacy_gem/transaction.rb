@@ -1,6 +1,6 @@
 module RecurlyLegacyGem
   class Transaction < Resource
-    require 'recurly/transaction/errors'
+    require 'recurly_legacy_gem/transaction/errors'
 
     # @macro [attach] scope
     #   @scope class

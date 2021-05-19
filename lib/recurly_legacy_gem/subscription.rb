@@ -1,6 +1,6 @@
 module RecurlyLegacyGem
   class Subscription < Resource
-    require 'recurly/subscription/add_ons'
+    require 'recurly_legacy_gem/subscription/add_ons'
 
     # @macro [attach] scope
     #   @scope class

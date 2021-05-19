@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'recurly/version'
+require 'recurly_legacy_gem/version'
 
 Gem::Specification.new do |s|
   s.name             = 'recurly-legacy'

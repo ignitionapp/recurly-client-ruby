@@ -114,9 +114,9 @@ module RecurlyLegacyGem
   #
   #   Account.find_each { |account| p account }
   class Resource
-    require 'recurly/resource/errors'
-    require 'recurly/resource/pager'
-    require 'recurly/resource/association'
+    require 'recurly_legacy_gem/resource/errors'
+    require 'recurly_legacy_gem/resource/pager'
+    require 'recurly_legacy_gem/resource/association'
 
     # Raised when a record cannot be found.
     #
