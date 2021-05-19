@@ -2,7 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
 require 'recurly/version'
 
 Gem::Specification.new do |s|
-  s.name             = 'recurly'
+  s.name             = 'recurly-legacy'
   s.version          = RecurlyLegacyGem::Version.to_s
   s.summary          = 'Recurly API Client'
   s.description      = 'An API client library for Recurly: http://recurly.com'
