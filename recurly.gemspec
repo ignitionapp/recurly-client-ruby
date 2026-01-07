@@ -7,11 +7,9 @@ Gem::Specification.new do |s|
   s.summary          = 'Recurly API Client'
   s.description      = 'An API client library for Recurly: http://recurly.com'
 
-  s.files            = Dir['lib/**/*']
-
-  s.has_rdoc         = true
-  s.extra_rdoc_files = %w(README.md)
-  s.rdoc_options     = %w(--main README.md)
+  s.files = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
 
   s.author           = 'Recurly'
   s.email            = 'support@recurly.com'
